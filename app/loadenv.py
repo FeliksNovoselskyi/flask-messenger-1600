@@ -1,4 +1,4 @@
-# Назар
+
 import os
 import dotenv
 

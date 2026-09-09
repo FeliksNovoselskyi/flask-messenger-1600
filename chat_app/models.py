@@ -10,3 +10,10 @@ class User(DB.Model):
     
     # password
     password = DB.Column(DB.String)
+
+
+# модель - шаблон таблицы
+# таблица - часть БД, в которой хранятся
+
+
+# модель - шаблон записи
