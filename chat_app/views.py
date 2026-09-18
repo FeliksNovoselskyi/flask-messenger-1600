@@ -1,10 +1,11 @@
 import flask
+import werkzeug.security
 from chat_app.models import User
 import flask_login
 
 from app.db import DATABASE
 import werkzeug
-
+from chat_app.models import User
 
 
 def render_chat():
@@ -49,6 +50,7 @@ def render_reg():
 # Создать функцію отображенія шаблона auth.html
 
 def render_auth():
+    
     if flask.request.method == "POST":
         email = flask.request.form.get("email")
         password = flask.request.form.get("password")
@@ -56,20 +58,22 @@ def render_auth():
         if email and password:
             user = User.query.filter_by(email = email)
             
-            # SELECT user.id AS user_id, user.email AS user_email, user.password AS user_password 
-            # FROM user 
-            # WHERE user.email = ?
-            print("\n", user)
-            
-            
             if user:
                 # Он отправляет запрос, возвращает объект пользователя
                 user = user.scalar()
                 
-                # <User 1> felixdnbox@gmail.com
                 print(user, user.email)
-
-                flask_login.login_user(user=user)
+                
+                is_correct_password = werkzeug.security.check_password_hash(
+                    pwhash=user.password, 
+                    password = password
+                )
+                
+                # Одна строка - один хеш
+                
+                if is_correct_password:
+                    
+                    flask_login.login_user(user=user)
             
             
     return flask.render_template("auth.html")
