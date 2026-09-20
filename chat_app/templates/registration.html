@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block links %} 
+    <link rel="stylesheet" href= "{{ url_for('chat.static', filename='css/style.css')}}">
+{% endblock %}
+
 {% block content %}
     <form action="" method="post">
         <input type="email" placeholder="Ваша пошта" name="email">

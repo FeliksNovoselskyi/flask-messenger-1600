@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+
+{% block links %} 
+    <link rel="stylesheet" href= "{{ url_for('chat.static', filename='css/style.css')}}">
+{% endblock %}
+
 {% block content %}
 <form method="post">
 
@@ -6,9 +11,10 @@
     <input type="password" placeholder="Введите пароль" name= "password">
     <button type="submit">Ввойти</button>
 
+    <p>{{ error }}</p>
+
     <!-- Почти -->
     <!-- Пароля -->
     <!-- Кнопка отправкі -->
 </form>
 {% endblock content %}
-

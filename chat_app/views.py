@@ -58,12 +58,10 @@ def render_auth():
         if email and password:
             user = User.query.filter_by(email = email)
             
+            # Он отправляет запрос, возвращает объект пользователя
+            user = user.scalar()
+            
             if user:
-                # Он отправляет запрос, возвращает объект пользователя
-                user = user.scalar()
-                
-                print(user, user.email)
-                
                 is_correct_password = werkzeug.security.check_password_hash(
                     pwhash=user.password, 
                     password = password
@@ -74,6 +72,22 @@ def render_auth():
                 if is_correct_password:
                     
                     flask_login.login_user(user=user)
-            
-            
+                
+                else:
+                    data = {
+                        "error": "Логин или пароль неверны"
+                    }
+                    return flask.render_template("auth.html", **data)
+                
+            else:
+                data = {
+                    "error": "Такого пользователя нету"
+                }
+                return flask.render_template("auth.html", **data)
+        else:
+            data = {
+                "error": "Заполните все поля"
+            }
+            return flask.render_template("auth.html", **data)
+        
     return flask.render_template("auth.html")
