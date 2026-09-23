@@ -13,8 +13,10 @@
         <a href="/">Головна</a>
         <a href="/reg">Регістрація</a>
         <a href="/auth">Авторизація</a>
+        {% if can_logout %}
+            <a href="/logout">Вийти</a>
+        {% endif %}
     </header>
-
     
     <main>
         {% block content %} 
