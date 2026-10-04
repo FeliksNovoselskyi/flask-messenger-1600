@@ -16,6 +16,10 @@ def render_chat():
             "can_logout": True
         }
         
+        user1 = User.query.get(1)
+        
+        print(user1.chat.title)
+        
         return flask.render_template("chat.html", **data)
     
     return flask.render_template("chat.html")
