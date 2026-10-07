@@ -5,15 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <!-- first-paragraph -->
-    <div class = "standard-container" >
-        <p id = "first-paragraph">Днепр</p>
-    </div>
-    <div class = "standard-container">
-        <p>Днепр2</p>
-    </div>
-
-    <p>Chargoggagoggmanchauggagoggchaubunagungamaugg</p>
-
-    <a href = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEedBMuaHImZBADRQsa5r77QKaPicnIFagb9ajPp-l6Rnx4WibzAxVn9tQ&s=10">Free robux</a>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
 {% endblock %}

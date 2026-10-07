@@ -12,13 +12,16 @@ from chat_app.models import User
 def render_chat():
     
     if flask_login.current_user.is_authenticated:
-        data = {
-            "can_logout": True
-        }
         
         user1 = User.query.get(1)
         
-        print(user1.chat.title)
+        # [<Message 1>, <Message 2>, <Message 3>]
+        print(user1.messages)
+        
+        data = {
+            "can_logout": True,
+            "messages" : user1.messages
+        }
         
         return flask.render_template("chat.html", **data)
     

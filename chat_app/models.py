@@ -1,4 +1,5 @@
 import flask_login
+from sqlalchemy import Constraint
 from app.db import DATABASE as DB
 
 # uq_user_email
@@ -25,37 +26,52 @@ class User(DB.Model, flask_login.UserMixin):
     chat = DB.relationship(
         "Chat",
         back_populates = "user",
-        # Указивает, мы связываемся с одним объектом, или со множество
-        # False - c одним объектом
-        # True - с множество
         uselist = False
     )
+    
+    # Кирилл
+    # One-to-Many
+    messages = DB.relationship(
+        "Message",
+        back_populates = "user",
+        uselist = True
+    )
+    
+    # Со сколькими объектами будет связи
+    # uselist=True - множество объектов
+    # uselist=False - один объект
 
-# Артем: создать модель Chat
+
 class Chat(DB.Model):
     id = DB.Column(DB.Integer, primary_key = True)
     title = DB.Column(DB.String)
     
+    # user_id
     user_id = DB.Column(
         DB.Integer, 
-        DB.ForeignKey("user.id"),
-        unique = True
+        DB.ForeignKey("user.id", name="fk_chat_user_id")
     )
     
-    # DB.ForeignKey("user.id")
-    # ForeignKey - заграничный ключ, через него указываем id связаной записи
-    # user.id:
-        # user - таблица пользователя
-        # user.id - столбец с его id
-    
+    # Кирилл
     user = DB.relationship(
         "User",
-        back_populates="chat"
+        back_populates = "chat"
     )
 
-# Ростик: создать модель Message
 
 class Message(DB.Model):
-    
     id = DB.Column(DB.Integer, primary_key = True)
-    text = DB.Column(DB.String)
+    content = DB.Column(DB.String)
+    
+    user_id = DB.Column(
+        DB.Integer, 
+        DB.ForeignKey("user.id", name="fk_message_user_id")
+    )
+    
+    # Егор
+    # Настроить связь с моделью User
+    user = DB.relationship(
+        "User",
+        back_populates = "messages"
+    )
+
