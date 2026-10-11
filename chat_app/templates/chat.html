@@ -9,3 +9,7 @@
         <p>{{ message }}</p>
     {% endfor %}
 {% endblock %}
+
+{% block scripts %}
+    <script type ="module" src = "{{url_for('chat.static', filename ='js/main.js')}}"></script>
+{% endblock %}
