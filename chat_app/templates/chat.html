@@ -5,9 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    {% for message in messages %}
-        <p>{{ message }}</p>
-    {% endfor %}
+    <!-- Собрать контейнер для сообщений -->
+    <div>
+        <input id= 'input-field' type="text" placeholder="Введите текст">
+        <button id="send-button" type="button">Send</button>
+    </div>
+    <div id="message-container">
+        <!-- Здесь будут сообщения -->
+    </div>
+    
+    
 {% endblock %}
 
 {% block scripts %}
