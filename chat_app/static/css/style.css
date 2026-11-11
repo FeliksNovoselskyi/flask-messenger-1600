@@ -26,5 +26,35 @@ input{
     font-size: 14px;
 }
 
+main{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+}
 
+#chat_container{
+    height: 100%;
+    width: 33.3%;
+    border: 1px solid black;
+}
 
+#chat-field{
+    width: 33.3%;
+    height: 100%;
+    border: 1px solid black;
+}
+
+/*🦒🦒🦒Добавить бордер input-container🦒🦒🦒*/
+#input-container{
+    border: 1px solid black;
+}
+/*🦒🦒🦒Для message-container указать высоту в 90%🦒🦒🦒*/
+#message-container{
+    height: 91.5%;
+}
+#participants-container{
+    border: 1px solid black;
+    width: 33.3%;
+    height: 100%;
+}

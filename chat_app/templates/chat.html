@@ -5,15 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Собрать контейнер для сообщений -->
-    <div>
-        <input id= 'input-field' type="text" placeholder="Введите текст">
-        <button id="send-button" type="button">Send</button>
-    </div>
-    <div id="message-container">
-        <!-- Здесь будут сообщения -->
+    <div id = "chat_container">
+        {% for chat in chats %}
+            <a href="/chat/{{ chat.id }}">{{ chat.title }}</a>
+        {% endfor %}
     </div>
     
+
+    <div id='chat-field' class="chat-field">
+        <div id="message-container" class="message-container">
+        </div>
+        <div id='input-container' class="input-container">
+            <input id= 'input-field' type="text" placeholder="Введите текст">
+            <button id="send-button" type="button">Send</button>
+        </div>
+    </div>
+
+    <!--🦒🦒🦒Егор. Собрать контейнер под отображение участников чата🦒🦒🦒-->
+    <div id="participants-container">
+        <h3>Участники чата</h3>
+    </div>
     
 {% endblock %}
 
