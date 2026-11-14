@@ -13,15 +13,10 @@
     
 
     <div id='chat-field' class="chat-field">
-        <div id="message-container" class="message-container">
-        </div>
-        <div id='input-container' class="input-container">
-            <input id= 'input-field' type="text" placeholder="Введите текст">
-            <button id="send-button" type="button">Send</button>
-        </div>
+        {% block messages %}
+        {% endblock %}
     </div>
 
-    <!--🦒🦒🦒Егор. Собрать контейнер под отображение участников чата🦒🦒🦒-->
     <div id="participants-container">
         <h3>Участники чата</h3>
     </div>

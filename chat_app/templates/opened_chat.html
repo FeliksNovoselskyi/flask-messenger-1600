@@ -1,8 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'chat.html' %}
 
-{% block content %}
-    
-    {% if title %}
-        <p>{{ title }}</p>
-    {% endif %}
+{% block messages %}
+    <h2>{{ title }}</h2>
+    <div id="message-container" class="message-container">
+    </div>
+    <div id='input-container' class="input-container">
+        <input id= 'input-field' type="text" placeholder="Введите текст">
+        <button id="send-button" type="button">Send</button>
+    </div>
 {% endblock %}
