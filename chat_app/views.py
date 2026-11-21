@@ -158,8 +158,6 @@ def render_opened_chat(chat_id):
     chat = Chat.query.get(chat_id)
     messages = Message.query.filter_by(chat_id=chat_id)
     
-    print(messages)
-    
     # Собрать словарь с чатом
     if chat is None:
         return flask.redirect("/")
@@ -168,8 +166,15 @@ def render_opened_chat(chat_id):
         "id": chat.id,
         "title": chat.title,
         "chats": chats,
-        "messages": messages
+        "messages": messages,
+        "members": []
     }
+    
+    for user in chat.users:
+        context["members"].append({
+            "email": user.email,
+            "is_online": True
+        })
     
     # Передать словарь на шаблон
     return flask.render_template("opened_chat.html", **context)

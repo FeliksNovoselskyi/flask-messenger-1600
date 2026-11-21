@@ -13,3 +13,9 @@
         <button id="send-button" type="button">Send</button>
     </div>
 {% endblock %}
+
+{% block members_block %}
+    {% for member in members %}
+        <p>{{ member.email }} <span>{% if member.is_online %}🟢{% else %}🔴{% endif %}</span></p>
+    {% endfor %}
+{% endblock %}

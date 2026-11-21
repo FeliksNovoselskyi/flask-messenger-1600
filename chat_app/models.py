@@ -23,10 +23,10 @@ class User(DB.Model, flask_login.UserMixin):
     birth_date = DB.Column(DB.DateTime)
     avatar_path = DB.Column(DB.String)
     
-    chat = DB.relationship(
+    chats = DB.relationship(
         "Chat",
-        back_populates = "user",
-        uselist = False
+        back_populates = "users",
+        secondary = "user_chat"
     )
     
     # Кирилл
@@ -52,10 +52,10 @@ class Chat(DB.Model):
         DB.ForeignKey("user.id", name="fk_chat_user_id")
     )
     
-    # Кирилл
-    user = DB.relationship(
+    users = DB.relationship(
         "User",
-        back_populates = "chat"
+        back_populates = "chats",
+        secondary = "user_chat"
     )
     
     messages = DB.relationship(
@@ -89,3 +89,22 @@ class Message(DB.Model):
     
     chat = DB.relationship("Chat", back_populates="messages")
 
+class UserChat(DB.Model):
+    
+    id = DB.Column(
+        
+        DB.Integer,
+        primary_key = True
+    )
+    
+    user_id = DB.Column(
+        DB.Integer,
+        DB.ForeignKey("user.id"),
+        nullable= False
+    )
+    
+    chat_id = DB.Column(
+        DB.Integer,
+        DB.ForeignKey("chat.id"),
+        nullable= False
+    )
