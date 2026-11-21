@@ -42,4 +42,6 @@ main_app.add_url_rule(
 )
 
 
+
+
 main_app.register_blueprint(blueprint = chat_app_blueprint)

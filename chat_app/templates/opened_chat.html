@@ -3,7 +3,11 @@
 {% block messages %}
     <h2>{{ title }}</h2>
     <div id="message-container" class="message-container">
+        {% for message in messages %}
+            <p>{{ message.content }}</p>
+        {% endfor %}
     </div>
+    
     <div id='input-container' class="input-container">
         <input id= 'input-field' type="text" placeholder="Введите текст">
         <button id="send-button" type="button">Send</button>

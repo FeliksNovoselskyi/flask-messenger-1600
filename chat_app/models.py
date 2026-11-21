@@ -57,6 +57,12 @@ class Chat(DB.Model):
         "User",
         back_populates = "chat"
     )
+    
+    messages = DB.relationship(
+        "Message",
+        back_populates="chat",
+        cascade="all, delete-orphan"
+    )
 
 
 class Message(DB.Model):
@@ -68,10 +74,18 @@ class Message(DB.Model):
         DB.ForeignKey("user.id", name="fk_message_user_id")
     )
     
+    chat_id = DB.Column(
+        DB.Integer, 
+        DB.ForeignKey("chat.id", ondelete="CASCADE"), 
+        nullable = False
+    )
+    
     # Егор
     # Настроить связь с моделью User
     user = DB.relationship(
         "User",
         back_populates = "messages"
     )
+    
+    chat = DB.relationship("Chat", back_populates="messages")
 

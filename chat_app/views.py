@@ -1,4 +1,4 @@
-from chat_app.models import Chat
+from chat_app.models import Chat, Message
 import flask
 import werkzeug.security
 from chat_app.models import User
@@ -13,20 +13,16 @@ def render_chat():
     
     if flask_login.current_user.is_authenticated:
         
+        chats = Chat.query.all()
+        
         data = {
-            "can_logout": True
+            "can_logout": True,
+            "chats": chats
         }
         
         return flask.render_template("chat.html", **data)
     
-    # Егор. Получить все записи чатов (Chat)
-    # И передать их на шаблон
-    chats = Chat.query.all()
-    chats_data = {
-        "chats": chats
-    }
-    
-    return flask.render_template("chat.html", **chats_data)
+    return flask.redirect("/auth")
 
 def render_reg():
     
@@ -158,7 +154,11 @@ def render_logout():
 # Функция принимает аргумент chat_id
 def render_opened_chat(chat_id):
     
+    chats = Chat.query.all()
     chat = Chat.query.get(chat_id)
+    messages = Message.query.filter_by(chat_id=chat_id)
+    
+    print(messages)
     
     # Собрать словарь с чатом
     if chat is None:
@@ -166,7 +166,10 @@ def render_opened_chat(chat_id):
     
     context = {
         "id": chat.id,
-        "title": chat.title
+        "title": chat.title,
+        "chats": chats,
+        "messages": messages
     }
+    
     # Передать словарь на шаблон
     return flask.render_template("opened_chat.html", **context)
