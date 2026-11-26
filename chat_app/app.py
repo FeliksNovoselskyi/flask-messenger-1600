@@ -10,3 +10,13 @@ chat_app_blueprint = flask.Blueprint(
 )
 
 online_users = {}
+
+
+"""
+online_users =  {
+    id_пользователя: {
+        sid_клиентов_пользователя,
+        sid_клиентов_пользователя
+    }
+}
+"""
